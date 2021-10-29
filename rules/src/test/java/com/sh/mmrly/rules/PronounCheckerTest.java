@@ -2,7 +2,7 @@ package com.sh.mmrly.rules;
 
 import com.sh.mmrly.Replacement;
 import com.sh.mmrly.nlp.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
