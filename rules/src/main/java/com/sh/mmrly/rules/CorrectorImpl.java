@@ -1,18 +1,24 @@
-package com.sh.mmrly.rest;
+package com.sh.mmrly.rules;
 
 import com.sh.mmrly.Corrector;
+import com.sh.mmrly.Replacement;
 import com.sh.mmrly.nlp.TextWithWhitespace;
-import com.sh.mmrly.rules.Suggestion;
-import com.sh.mmrly.rules.TextWithSuggestions;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 
+/**
+ * Test version of corrector
+ */
 @ApplicationScoped
 public class CorrectorImpl implements Corrector {
   @Override
   public TextWithSuggestions makeSuggestions(String text) {
-    return TextWithSuggestions.simpleTextOf("This is a text.");
+    return TextWithSuggestions.simpleTextOf(text).withSuggestions(
+        Suggestion.singleChangeOf(Replacement.of(0, "That"), 0),
+        Suggestion.singleChangeOf(Replacement.of(0, "That"), 0),
+        Suggestion.singleChangeOf(Replacement.of(0, "That"), 0)
+    );
   }
 
   @Override

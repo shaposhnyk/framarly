@@ -15,8 +15,8 @@ public record TextWithSuggestions(
     final List<String> parts = Arrays.asList(text.split(" "));
     var len = parts.size();
     final List<TextWithWhitespace> sentence = Stream.concat(
-        parts.subList(0, Math.max(0, len - 2)).stream().map(TWS::new),
-        parts.subList(Math.max(0, len - 1), len).stream().map(TNS::new)
+        parts.subList(0, Math.max(0, len - 1)).stream().map(TextWithSuggestions::textWithSpaceOf),
+        parts.subList(Math.max(0, len - 1), len).stream().map(TextWithSuggestions::textOf)
     ).collect(Collectors.toUnmodifiableList());
     return new TextWithSuggestions(sentence, List.of());
   }
@@ -39,22 +39,15 @@ public record TextWithSuggestions(
         '}';
   }
 
-  record TWS(String text) implements TextWithWhitespace {
-    @Override
-    public String whitespace() {
-      return " ";
-    }
+  public static TextWithWhitespace textWithSpaceOf(String text) {
+    return new TWS(text, " ");
   }
 
-  record TNS(String text) implements TextWithWhitespace {
-    @Override
-    public String whitespace() {
-      return "";
-    }
+  public static TextWithWhitespace textOf(String text) {
+    return new TWS(text, "");
+  }
 
-    @Override
-    public String completeText() {
-      return text();
-    }
+  record TWS(String text, String whitespace) implements TextWithWhitespace {
+
   }
 }
