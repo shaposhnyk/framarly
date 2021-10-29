@@ -1,0 +1,18 @@
+<div id="app">
+    <div @blur="update" contenteditable
+         id="editor" v-html="sourceHtml"></div>
+    <div class="main">
+        <div id="preview" v-html="target"></div>
+        <ul class="todo-list">
+            <li :class="{ completed: todo.completed }" :key="todo.id"
+                class="todo"
+                v-for="todo in filteredTodos">
+                <div class="view">
+                    <input @click="applyTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed"/>
+                    <label>{{ todo.title }}</label>
+                    <button @click="removeTodo(todo)" class="destroy"></button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
