@@ -12,8 +12,12 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/")
 public class WebService {
+  private final Corrector corrector;
+
   @Inject
-  private Corrector corrector;
+  public WebService(Corrector corrector) {
+    this.corrector = corrector;
+  }
 
   @GET
   @Path("/todos")
