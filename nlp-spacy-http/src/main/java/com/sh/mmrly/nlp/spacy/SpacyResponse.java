@@ -1,8 +1,8 @@
 package com.sh.mmrly.nlp.spacy;
 
-import com.sh.mmrly.nlp.TextWithPos;
+import com.sh.mmrly.nlp.ParsedSentence;
 
 import java.util.List;
 
-public record SpacyResponse(List<TextWithPos> data) {
+public record SpacyResponse(List<ParsedSentence> data) {
 }

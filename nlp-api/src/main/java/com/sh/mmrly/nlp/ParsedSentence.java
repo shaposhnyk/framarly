@@ -4,7 +4,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public record TextWithPos(
+/**
+ * Parsed sentence containing raw sentence string and list of POS tokens
+ */
+public record ParsedSentence(
     @NotNull String text,
     @NotNull List<TaggedToken> tags
 ) {

@@ -1,6 +1,6 @@
 package com.sh.mmrly.nlp.spacy;
 
-import com.sh.mmrly.nlp.TextWithPos;
+import com.sh.mmrly.nlp.ParsedSentence;
 import com.sh.mmrly.nlp.Tokenizer;
 import com.sh.mmrly.nlp.XResponse;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
@@ -22,7 +22,7 @@ public class SpacyTokenizer implements Tokenizer {
   }
 
   @Override
-  public XResponse<List<TextWithPos>> tokenize(String text) {
+  public XResponse<List<ParsedSentence>> tokenize(String text) {
     var data = spacy.tokenize(text).data();
     return new XResponse<>(data);
   }

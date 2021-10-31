@@ -3,8 +3,8 @@ package com.sh.mmrly.nlp.spacy;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sh.mmrly.nlp.DEP;
 import com.sh.mmrly.nlp.POS;
+import com.sh.mmrly.nlp.ParsedSentence;
 import com.sh.mmrly.nlp.TaggedToken;
-import com.sh.mmrly.nlp.TextWithPos;
 import io.quarkus.jackson.runtime.JacksonBuildTimeConfig;
 import io.quarkus.jackson.runtime.ObjectMapperProducer;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ class SpacyObjectMapperCustomizerTest {
     SpacyResponse json = om.createParser(in)
         .readValueAs(SpacyResponse.class);
 
-    assertThat(json.data()).extracting(TextWithPos::text)
+    assertThat(json.data()).extracting(ParsedSentence::text)
         .containsExactly("Le vin coule.", "Coulé.");
     TaggedToken token = json.data().get(1).tags().get(0);
     assertThat(token.pos()).isEqualTo(POS.valueOf("myPos"));
