@@ -11,13 +11,13 @@ import java.util.List;
  * Test version of corrector
  */
 @Alternative
-public class CorrectorImpl implements Corrector {
+public class Corrector2Impl implements Corrector {
   @Override
   public TextWithSuggestions makeSuggestions(String text) {
     return TextWithSuggestions.simpleTextOf(text).withSuggestions(
-        Suggestion.singleChangeOf(Replacement.of(0, "That"), 0),
-        Suggestion.singleChangeOf(Replacement.of(0, "That"), 0),
-        Suggestion.singleChangeOf(Replacement.of(0, "That"), 0)
+        Suggestion.singleChangeOf(Replacement.of(0, "This"), 0),
+        Suggestion.singleChangeOf(Replacement.of(0, "This"), 0),
+        Suggestion.singleChangeOf(Replacement.of(0, "This"), 0)
     );
   }
 

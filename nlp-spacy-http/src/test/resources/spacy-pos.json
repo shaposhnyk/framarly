@@ -1,0 +1,92 @@
+{
+  "data": [
+    {
+      "text": "Le vin coule.",
+      "tags": [
+        {
+          "text": "Le",
+          "lemma": "le",
+          "pos": "DET",
+          "dep": "det",
+          "morph": {
+            "Definite": "Def",
+            "Gender": "Masc",
+            "Number": "Sing",
+            "PronType": "Art"
+          },
+          "children": [],
+          "whitespace": " ",
+          "shape": "Xx"
+        },
+        {
+          "text": "vin",
+          "lemma": "vin",
+          "pos": "NOUN",
+          "dep": "nsubj",
+          "morph": {
+            "Gender": "Masc",
+            "Number": "Sing",
+            "Tense": "Present"
+          },
+          "children": [
+            0
+          ],
+          "whitespace": " ",
+          "shape": "xxx"
+        },
+        {
+          "text": "coule",
+          "lemma": "coule",
+          "pos": "VERB",
+          "dep": "ROOT",
+          "morph": {
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin"
+          },
+          "children": [
+            1,
+            3
+          ],
+          "whitespace": "",
+          "shape": "xxxx"
+        },
+        {
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "dep": "punct",
+          "morph": {},
+          "children": [],
+          "whitespace": "",
+          "shape": "."
+        }
+      ]
+    },
+    {
+      "text": "Coulé.",
+      "tags": [
+        {
+          "text": "Coulé",
+          "lemma": "Coule",
+          "pos": "myPos",
+          "dep": "myDep",
+          "morph": {
+            "Definite": "myDef",
+            "Gender": "Masc",
+            "Number": "Sing",
+            "PronType": "Art",
+            "Temp": "MyTemp"
+          },
+          "children": [
+            0
+          ],
+          "whitespace": ".",
+          "shape": "Xxxxx"
+        }
+      ]
+    }
+  ]
+}
