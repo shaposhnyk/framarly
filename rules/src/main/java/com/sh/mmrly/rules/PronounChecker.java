@@ -1,9 +1,6 @@
 package com.sh.mmrly.rules;
 
-import com.sh.mmrly.Replacement;
-import com.sh.mmrly.RuleChecker;
-import com.sh.mmrly.RuleCode;
-import com.sh.mmrly.Vocabulary;
+import com.sh.mmrly.*;
 import com.sh.mmrly.nlp.DEP;
 import com.sh.mmrly.nlp.POS;
 import com.sh.mmrly.nlp.TaggedToken;
@@ -58,13 +55,14 @@ public class PronounChecker implements RuleChecker {
     if (form == null) {
       return k < 0 ? Suggestion.selectionOf(i, j) : Suggestion.selectionOf(i, j, k);
     }
-    final var change = k < 0 ? Replacement.of(i, form) : Replacement.of(k, form);
+    final var formws = TWS.of(form, mVerb.whitespace());
+    final var change = k < 0 ? Replacement.insertAt(i, formws) : Replacement.insertAt(k, formws);
     return k < 0 ? Suggestion.singleChangeOf(change, i, j) : Suggestion.singleChangeOf(change, i, j, k);
   }
 
   private int verbOrAuxIdx(TaggedToken verb, List<TaggedToken> sentence) {
     for (int idx : verb.children()) {
-      var aux = sentence.get(idx);
+      final var aux = sentence.get(idx);
       if (DEP.tense.equals(aux.dep())) {
         return idx;
       }

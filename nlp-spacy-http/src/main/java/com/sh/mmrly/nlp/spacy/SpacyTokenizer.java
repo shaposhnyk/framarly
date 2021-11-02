@@ -23,7 +23,7 @@ public class SpacyTokenizer implements Tokenizer {
 
   @Override
   public XResponse<List<ParsedSentence>> tokenize(String text) {
-    var data = spacy.tokenize(text).data();
+    var data = spacy.tokenizePrivate(new SpacyText(text)).data();
     return new XResponse<>(data);
   }
 }

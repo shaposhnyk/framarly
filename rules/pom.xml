@@ -31,7 +31,13 @@
         <dependency>
             <groupId>com.sh</groupId>
             <artifactId>mamarly-nlp</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sh</groupId>
+            <artifactId>mamarly-spacy-http</artifactId>
+            <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

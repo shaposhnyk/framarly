@@ -15,5 +15,5 @@ public interface SpacyRestService {
   @Path("/pos")
   @Produces("application/json")
   @Consumes("application/json")
-  SpacyResponse tokenizePrivate(String text);
+  SpacyResponse tokenizePrivate(SpacyText text);
 }

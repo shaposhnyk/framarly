@@ -43,7 +43,7 @@ public class PronounCheckerTest extends AbstractCheckerTest {
   public void incorrectPhraseVocab() {
     List<TaggedToken> sentence = List.of(t("Hier"), JE, FAIT, t("ca"));
     assertSelection(miniChk, sentence).containsExactly(1, 2);
-    assertReplacement(miniChk, sentence).containsExactly(Replacement.of(2, "fais"));
+    assertReplacement(miniChk, sentence).containsExactly(Replacement.replaceAt(2, "fais"));
   }
 
   @Test
@@ -56,6 +56,6 @@ public class PronounCheckerTest extends AbstractCheckerTest {
   public void incorrectPhraseAuxVocab() {
     List<TaggedToken> sentence = List.of(t("Hier"), JE, A, FAIT.withChildren(0, 1, 2), t("ca"));
     assertSelection(miniChk, sentence).containsExactly(1, 2, 3);
-    assertReplacement(miniChk, sentence).containsExactly(Replacement.of(2, "ai"));
+    assertReplacement(miniChk, sentence).containsExactly(Replacement.replaceAt(2, "ai"));
   }
 }
