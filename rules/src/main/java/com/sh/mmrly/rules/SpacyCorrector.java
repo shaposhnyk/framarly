@@ -1,12 +1,13 @@
 package com.sh.mmrly.rules;
 
 import com.sh.mmrly.Corrector;
-import com.sh.mmrly.Replacement;
 import com.sh.mmrly.RuleChecker;
 import com.sh.mmrly.TWS;
 import com.sh.mmrly.nlp.ParsedSentence;
+import com.sh.mmrly.nlp.TaggedToken;
 import com.sh.mmrly.nlp.TextWithWhitespace;
 import com.sh.mmrly.nlp.Tokenizer;
+import io.quarkus.logging.Log;
 
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
@@ -51,18 +52,20 @@ public class SpacyCorrector extends DummyCorrector implements Corrector {
     for (int i = 0; i < tokenizedText.data().size(); i++) {
       ParsedSentence sentence = tokenizedText.data().get(i);
       sentence.tags().stream().map(TWS::copyOf).forEach(tokens::add);
+      Log.infov("processing sentence {0}", sentence.tags());
       if (i == 0) {
-        suggestions = computeSuggestions(tokens).suggestions();
+        suggestions = computeSuggestions(sentence.tags());
       }
     }
     return new TextWithSuggestions(tokens, suggestions);
   }
 
-  private TextWithSuggestions computeSuggestions(List<TextWithWhitespace> sentence) {
-    return new TextWithSuggestions(sentence, Arrays.asList(
-        Suggestion.singleChangeOf(Replacement.replaceAt(0, "That"), 0),
-        Suggestion.singleChangeOf(Replacement.insertAt(0, "Oh"), 0),
-        Suggestion.singleChangeOf(Replacement.deleteFrom(1, 2), 0)
-    ));
+  private List<Suggestion> computeSuggestions(List<TaggedToken> sentence) {
+    final List<Suggestion> list = new ArrayList<>();
+    for (RuleChecker chk : checkers) {
+      List<Suggestion> suggestions = chk.makeSuggestions(sentence);
+      list.addAll(suggestions);
+    }
+    return list;
   }
 }

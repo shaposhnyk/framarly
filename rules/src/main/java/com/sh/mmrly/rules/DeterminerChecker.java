@@ -5,10 +5,12 @@ import com.sh.mmrly.RuleChecker;
 import com.sh.mmrly.RuleCode;
 import com.sh.mmrly.nlp.*;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@ApplicationScoped
 public class DeterminerChecker implements RuleChecker {
   private static final Map<MDefinite, String> numberMap = Map.of(
       MDefinite.DEF, "les",

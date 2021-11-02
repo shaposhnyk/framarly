@@ -3,6 +3,7 @@ package com.sh.mmrly;
 import com.sh.mmrly.nlp.Tokenizer;
 import com.sh.mmrly.rules.DummyCorrector;
 import com.sh.mmrly.rules.SpacyCorrector;
+import com.sh.mmrly.rules.Vocabularies;
 import io.quarkus.arc.DefaultBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,11 @@ public class CorrectorFactory {
     this.config = config;
     this.spacyCorrector = new SpacyCorrector(tokenizer, checkers);
     this.dummyCorrector = new DummyCorrector();
+  }
+
+  @Produces
+  public Vocabulary vocabulary() {
+    return Vocabularies.presentMini();
   }
 
   @Produces

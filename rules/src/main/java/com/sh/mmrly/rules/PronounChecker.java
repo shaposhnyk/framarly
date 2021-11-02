@@ -5,9 +5,11 @@ import com.sh.mmrly.nlp.DEP;
 import com.sh.mmrly.nlp.POS;
 import com.sh.mmrly.nlp.TaggedToken;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
 
+@ApplicationScoped
 public class PronounChecker implements RuleChecker {
   private final Vocabulary vocab;
 
