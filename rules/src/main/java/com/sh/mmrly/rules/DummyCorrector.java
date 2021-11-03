@@ -2,6 +2,8 @@ package com.sh.mmrly.rules;
 
 import com.sh.mmrly.Corrector;
 import com.sh.mmrly.Replacement;
+import com.sh.mmrly.Suggestion;
+import com.sh.mmrly.TextWithSuggestions;
 import com.sh.mmrly.nlp.TextWithWhitespace;
 
 import java.util.ArrayList;

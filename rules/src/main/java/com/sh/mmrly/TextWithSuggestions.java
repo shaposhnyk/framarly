@@ -1,6 +1,5 @@
-package com.sh.mmrly.rules;
+package com.sh.mmrly;
 
-import com.sh.mmrly.TWS;
 import com.sh.mmrly.nlp.TextWithWhitespace;
 
 import java.util.Arrays;

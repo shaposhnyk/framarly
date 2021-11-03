@@ -1,6 +1,4 @@
-package com.sh.mmrly.rules;
-
-import com.sh.mmrly.Replacement;
+package com.sh.mmrly;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.sh.mmrly.rest;
 
 import com.sh.mmrly.Corrector;
-import com.sh.mmrly.rules.TextWithSuggestions;
+import com.sh.mmrly.TextWithSuggestions;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

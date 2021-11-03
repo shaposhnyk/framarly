@@ -3,6 +3,7 @@ package com.sh.mmrly.rules;
 import com.sh.mmrly.Replacement;
 import com.sh.mmrly.RuleChecker;
 import com.sh.mmrly.RuleCode;
+import com.sh.mmrly.Suggestion;
 import com.sh.mmrly.nlp.*;
 
 import javax.enterprise.context.ApplicationScoped;

@@ -2,6 +2,7 @@ package com.sh.mmrly.rules;
 
 import com.sh.mmrly.Replacement;
 import com.sh.mmrly.RuleChecker;
+import com.sh.mmrly.Suggestion;
 import com.sh.mmrly.nlp.TaggedToken;
 import com.sh.mmrly.nlp.TextWithWhitespace;
 import org.assertj.core.api.AbstractListAssert;

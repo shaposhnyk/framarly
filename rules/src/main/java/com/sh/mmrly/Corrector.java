@@ -1,8 +1,6 @@
 package com.sh.mmrly;
 
 import com.sh.mmrly.nlp.TextWithWhitespace;
-import com.sh.mmrly.rules.Suggestion;
-import com.sh.mmrly.rules.TextWithSuggestions;
 
 import java.util.List;
 

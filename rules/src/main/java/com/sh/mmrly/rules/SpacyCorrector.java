@@ -1,8 +1,6 @@
 package com.sh.mmrly.rules;
 
-import com.sh.mmrly.Corrector;
-import com.sh.mmrly.RuleChecker;
-import com.sh.mmrly.TWS;
+import com.sh.mmrly.*;
 import com.sh.mmrly.nlp.ParsedSentence;
 import com.sh.mmrly.nlp.TaggedToken;
 import com.sh.mmrly.nlp.TextWithWhitespace;
