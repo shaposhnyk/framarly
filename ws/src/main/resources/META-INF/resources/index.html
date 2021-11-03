@@ -1,18 +1,27 @@
 <div id="app">
-    <div @blur="update" contenteditable
-         id="editor" v-html="sourceHtml"></div>
-    <div class="main">
-        <div id="preview" v-html="target"></div>
-        <ul class="todo-list">
-            <li :class="{ completed: todo.completed }" :key="todo.id"
-                class="todo"
-                v-for="todo in filteredTodos">
-                <div class="view">
-                    <input @click="applyTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed"/>
-                    <label>{{ todo.title }}</label>
-                    <button @click="removeTodo(todo)" class="destroy"></button>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <section class="todoapp">
+        <header class="header">
+            <h1>Frammarly</h1>
+        </header>
+        <section class="main">
+            <div @blur="update" class="editor" contenteditable id="editor" v-html="sourceHtml"></div>
+            <div class="todos">
+                <ul class="todo-list">
+                    <li :class="{ completed: todo.completed }" :key="todo.id" class="todo"
+                        v-for="todo in filteredTodos">
+                        <div class="view">
+                            <input @click="applyTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed"/>
+                            <label>{{ todo.title }}</label>
+                            <button @click="removeTodo(todo)" class="destroy"></button>
+                        </div>
+                    </li>
+                </ul>
+                <div id="preview" v-html="target"></div>
+            </div>
+        </section>
+    </section>
+    <footer class="info">
+        <p>Write french text in the area to the left. Grammar improvement suggestions will appear on the right.</p>
+        <p>Written by <a href="https://www.grandpre-gallery.com">V Sh</a></p>
+    </footer>
 </div>
