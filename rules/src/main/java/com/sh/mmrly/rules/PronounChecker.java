@@ -55,11 +55,11 @@ public class PronounChecker implements RuleChecker {
   private Suggestion suggestVerbChange(TaggedToken mVerb, TaggedToken pronoun, int i, int j, int k) {
     final String form = vocab.form(mVerb.lemma(), pronoun.morph());
     if (form == null) {
-      return k < 0 ? Suggestion.selectionOf(i, j) : Suggestion.selectionOf(i, j, k);
+      return k < 0 ? Suggestion.of(code(), i, j) : Suggestion.of(code(), i, j, k);
     }
     final var formws = TWS.of(form, mVerb.whitespace());
     final var change = k < 0 ? Replacement.insertAt(i, formws) : Replacement.insertAt(k, formws);
-    return k < 0 ? Suggestion.singleChangeOf(change, i, j) : Suggestion.singleChangeOf(change, i, j, k);
+    return k < 0 ? Suggestion.changeOf(code(), change, i, j) : Suggestion.changeOf(code(), change, i, j, k);
   }
 
   private int verbOrAuxIdx(TaggedToken verb, List<TaggedToken> sentence) {

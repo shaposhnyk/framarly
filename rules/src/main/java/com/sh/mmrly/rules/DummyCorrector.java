@@ -1,9 +1,6 @@
 package com.sh.mmrly.rules;
 
-import com.sh.mmrly.Corrector;
-import com.sh.mmrly.Replacement;
-import com.sh.mmrly.Suggestion;
-import com.sh.mmrly.TextWithSuggestions;
+import com.sh.mmrly.*;
 import com.sh.mmrly.nlp.TextWithWhitespace;
 
 import java.util.ArrayList;
@@ -14,12 +11,14 @@ import java.util.stream.Collectors;
  * Test version of corrector. No spacy involved
  */
 public class DummyCorrector implements Corrector {
+  private final RuleCode dummyRule = new RuleCode("DUMMY");
+
   @Override
   public TextWithSuggestions makeSuggestions(String text) {
     return TextWithSuggestions.simpleTextOf(text).withSuggestions(
-        Suggestion.singleChangeOf(Replacement.replaceAt(0, "That"), 0),
-        Suggestion.singleChangeOf(Replacement.insertAt(0, "Oh"), 0),
-        Suggestion.singleChangeOf(Replacement.deleteFrom(1, 2), 0)
+        Suggestion.changeOf(dummyRule, Replacement.replaceAt(0, "That"), 0),
+        Suggestion.changeOf(dummyRule, Replacement.insertAt(0, "Oh"), 0),
+        Suggestion.changeOf(dummyRule, Replacement.deleteFrom(1, 2), 0)
     );
   }
 
