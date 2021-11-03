@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Unitary change. Proposed to replace positions with some text
@@ -14,6 +15,10 @@ public record Replacement(
     int len,
     @NotNull List<TextWithWhitespace> replacement
 ) {
+  public String replacementText() {
+    return replacement.stream().map(TextWithWhitespace::completeText).collect(Collectors.joining());
+  }
+
   public static Replacement of(int idx, int len, TextWithWhitespace... replacements) {
     return new Replacement(idx, len, Arrays.asList(replacements));
   }

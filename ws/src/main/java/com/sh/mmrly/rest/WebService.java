@@ -1,14 +1,14 @@
 package com.sh.mmrly.rest;
 
 import com.sh.mmrly.Corrector;
+import com.sh.mmrly.Suggestion;
 import com.sh.mmrly.TextWithSuggestions;
+import com.sh.mmrly.nlp.TextWithWhitespace;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("/")
 public class WebService {
@@ -24,5 +24,22 @@ public class WebService {
   @Produces(MediaType.APPLICATION_JSON)
   public TextWithSuggestions suggestChanges(@QueryParam("text") String text) {
     return corrector.makeSuggestions(text);
+  }
+
+  @POST
+  @Path("/todos")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public TextWithSuggestions apply(TextWithSuggestions input) {
+    List<TextWithWhitespace> sentence = input.sentence();
+    if (input.suggestions().size() < 1) {
+      throw new IllegalArgumentException();
+    }
+    TextWithSuggestions result = null;
+    for (Suggestion suggestion : input.suggestions()) {
+      result = corrector.applySuggestion(sentence, suggestion);
+      sentence = result.sentence();
+    }
+    return result;
   }
 }
