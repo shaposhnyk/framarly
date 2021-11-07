@@ -10,4 +10,9 @@ public record MPerson(@NotNull String ref) {
   public static MPerson valueOf(String value) {
     return value == null ? null : new MPerson(value);
   }
+
+  @Override
+  public String toString() {
+    return ref;
+  }
 }

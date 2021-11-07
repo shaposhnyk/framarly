@@ -4,7 +4,6 @@ import com.sh.mmrly.nlp.Tokenizer;
 import com.sh.mmrly.rules.DummyCorrector;
 import com.sh.mmrly.rules.SpacyCorrector;
 import com.sh.mmrly.rules.Vocabularies;
-import io.quarkus.arc.DefaultBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +38,6 @@ public class CorrectorFactory {
   }
 
   @Produces
-  @DefaultBean
   public Corrector corrector() {
     if (config.mock()) {
       logger.info("Returning dummy corrector");

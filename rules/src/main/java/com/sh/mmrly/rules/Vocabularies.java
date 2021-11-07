@@ -10,6 +10,7 @@ public class Vocabularies {
     v.add("être", SingleWordVocabulary.create("suis", "es", "est", "sommes", "êtes", "sont"));
     v.add("aller", SingleWordVocabulary.create("vais", "vas", "va", "allons", "allez", "vont"));
     v.add("faire", SingleWordVocabulary.create("fais", "fais", "fait", "faisons", "faitez", "font"));
+    v.add("pouvoir", SingleWordVocabulary.create("peux", "peux", "peut", "pouvons", "pouvez", "peuvent"));
     return v;
   }
 

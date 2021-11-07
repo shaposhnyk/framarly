@@ -4,9 +4,14 @@ import org.jetbrains.annotations.NotNull;
 
 public record MGender(@NotNull String ref) {
   public static final MGender MASC = new MGender("Masc");
-  public static final MGender FEM = new MGender("FEM");
+  public static final MGender FEM = new MGender("Fem");
 
   public static MGender valueOf(String value) {
     return value == null ? null : new MGender(value);
+  }
+
+  @Override
+  public String toString() {
+    return ref;
   }
 }

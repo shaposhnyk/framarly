@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public record Suggestion(
-    @NotNull RuleCode rule,
+    @NotNull RuleCode title,
     @NotNull List<Integer> selection, // indexes of words to select
     @NotNull List<Replacement> replacements // replacements
 ) {
@@ -39,10 +39,10 @@ public record Suggestion(
 
   public Suggestion withSelection(int... selection) {
     Arrays.sort(selection);
-    return new Suggestion(rule, IntStream.of(selection).boxed().collect(Collectors.toList()), replacements);
+    return new Suggestion(title, IntStream.of(selection).boxed().collect(Collectors.toList()), replacements);
   }
 
   public Suggestion withReplacements(Replacement... replacements) {
-    return new Suggestion(rule, selection, Arrays.asList(replacements));
+    return new Suggestion(title, selection, Arrays.asList(replacements));
   }
 }

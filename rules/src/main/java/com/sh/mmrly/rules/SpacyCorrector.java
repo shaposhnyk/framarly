@@ -1,23 +1,21 @@
 package com.sh.mmrly.rules;
 
 import com.sh.mmrly.*;
-import com.sh.mmrly.nlp.ParsedSentence;
-import com.sh.mmrly.nlp.TaggedToken;
-import com.sh.mmrly.nlp.TextWithWhitespace;
-import com.sh.mmrly.nlp.Tokenizer;
-import io.quarkus.logging.Log;
+import com.sh.mmrly.nlp.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Spacy-based corrector
  */
 public class SpacyCorrector extends DummyCorrector implements Corrector {
+  private static final Logger logger = LoggerFactory.getLogger(SpacyCorrector.class);
   private final Tokenizer tokenizer;
   private final Iterable<RuleChecker> checkers;
 
@@ -50,12 +48,31 @@ public class SpacyCorrector extends DummyCorrector implements Corrector {
     for (int i = 0; i < tokenizedText.data().size(); i++) {
       ParsedSentence sentence = tokenizedText.data().get(i);
       sentence.tags().stream().map(TWS::copyOf).forEach(tokens::add);
-      Log.infov("processing sentence {0}", sentence.tags());
+      if (logger.isInfoEnabled()) {
+        logSentence(sentence);
+      }
       if (i == 0) {
         suggestions = computeSuggestions(sentence.tags());
       }
     }
     return new TextWithSuggestions(tokens, suggestions);
+  }
+
+  private void logSentence(ParsedSentence sentence) {
+    logger.info("processing sentence: {}", sentence.text());
+    final var tags = sentence.tags().stream()
+        .map(TaggedToken::pos).map(POS::ref)
+        .collect(Collectors.joining("\t"));
+    logger.info("          with tags: {}", tags);
+    final var morphs = sentence.tags().stream()
+        .map(TaggedToken::morph)
+        .map(m -> Stream.of(m.person(), m.number(), m.gender())
+            .filter(Objects::nonNull)
+            .map(Objects::toString).map(s -> s.substring(0, 1))
+            .collect(Collectors.joining(","))
+        )
+        .collect(Collectors.joining("\t"));
+    logger.info("        with morphs: {}", morphs);
   }
 
   private List<Suggestion> computeSuggestions(List<TaggedToken> sentence) {

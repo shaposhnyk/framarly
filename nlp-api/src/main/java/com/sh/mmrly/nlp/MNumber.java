@@ -9,4 +9,9 @@ public record MNumber(@NotNull String ref) {
   public static MNumber valueOf(String value) {
     return value == null ? null : new MNumber(value);
   }
+
+  @Override
+  public String toString() {
+    return ref;
+  }
 }

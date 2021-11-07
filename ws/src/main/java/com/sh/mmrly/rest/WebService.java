@@ -4,6 +4,9 @@ import com.sh.mmrly.Corrector;
 import com.sh.mmrly.Suggestion;
 import com.sh.mmrly.TextWithSuggestions;
 import com.sh.mmrly.nlp.TextWithWhitespace;
+import io.quarkus.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -12,6 +15,7 @@ import java.util.List;
 
 @Path("/")
 public class WebService {
+  private static final Logger logger = LoggerFactory.getLogger(WebService.class);
   private final Corrector corrector;
 
   @Inject
@@ -23,6 +27,7 @@ public class WebService {
   @Path("/todos")
   @Produces(MediaType.APPLICATION_JSON)
   public TextWithSuggestions suggestChanges(@QueryParam("text") String text) {
+    Log.infov("Suggesting changes for: {0}", text);
     return corrector.makeSuggestions(text);
   }
 
