@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleDeserializers;
 import com.fasterxml.jackson.databind.module.SimpleSerializers;
 import com.sh.mmrly.RuleCode;
+import com.sh.mmrly.SelectionType;
 import io.quarkus.jackson.ObjectMapperCustomizer;
 import io.quarkus.logging.Log;
 import io.quarkus.runtime.LaunchMode;
@@ -46,6 +47,12 @@ public class WsObjectMapperCustomizer implements ObjectMapperCustomizer {
       ss.addSerializer(RuleCode.class, new JsonSerializer<>() {
         @Override
         public void serialize(RuleCode value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+          gen.writeString(value == null ? null : value.ref());
+        }
+      });
+      ss.addSerializer(SelectionType.class, new JsonSerializer<>() {
+        @Override
+        public void serialize(SelectionType value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
           gen.writeString(value == null ? null : value.ref());
         }
       });

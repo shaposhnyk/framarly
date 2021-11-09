@@ -1,7 +1,10 @@
 package com.sh.mmrly.rules;
 
 import com.sh.mmrly.*;
-import com.sh.mmrly.nlp.*;
+import com.sh.mmrly.nlp.POS;
+import com.sh.mmrly.nlp.ParsedSentence;
+import com.sh.mmrly.nlp.TaggedToken;
+import com.sh.mmrly.nlp.Tokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,17 +45,28 @@ public class SpacyCorrector extends DummyCorrector implements Corrector {
   @Override
   public TextWithSuggestions makeSuggestions(String text) {
     final var tokenizedText = tokenizer.tokenize(text);
-    final List<TextWithWhitespace> tokens = new ArrayList<>();
+    final List<TextWithMarkup> tokens = new ArrayList<>();
 
     List<Suggestion> suggestions = Collections.emptyList();
     for (int i = 0; i < tokenizedText.data().size(); i++) {
       ParsedSentence sentence = tokenizedText.data().get(i);
-      sentence.tags().stream().map(TWS::copyOf).forEach(tokens::add);
+      sentence.tags().stream()
+          .map(TWS::copyOf)
+          .forEach(txt -> tokens.add(TextWithMarkup.of(txt)));
       if (logger.isInfoEnabled()) {
         logSentence(sentence);
       }
       if (i == 0) {
         suggestions = computeSuggestions(sentence.tags());
+        for (Suggestion sg : suggestions) {
+          if (sg.type() != null) {
+            for (Integer idx : sg.selection()) {
+              if (idx >= 0 && idx < tokens.size()) {
+                tokens.set(idx, tokens.get(idx).withSelectionType(sg.type()));
+              }
+            }
+          }
+        }
       }
     }
     return new TextWithSuggestions(tokens, suggestions);

@@ -15,7 +15,7 @@ const app = Vue.createApp({
   computed: {
     sourceHtml() {
       return this.source
-        .map((x) => (x.t !== undefined)? ("<span class='"+(x.t == "e"? 'redUnderline' : 'yellowUnderline')+"'>"+x.text + x.whitespace+"</span>") : (x.text + x.whitespace))
+        .map((x) => ("ERR" == x.type)? ("<span class='redUnderline'>"+x.text + x.whitespace+"</span>") : (x.text + x.whitespace))
         .join("");
     },
     sourceText() {
@@ -55,7 +55,6 @@ const app = Vue.createApp({
             id: idx,
             title: x.title,
             replacements: x.replacements,
-            t: 'e'
         }));
       };
       xhr.send();

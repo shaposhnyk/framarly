@@ -18,17 +18,17 @@ public class DummyCorrector implements Corrector {
   @Override
   public TextWithSuggestions makeSuggestions(String text) {
     TextWithSuggestions txt = TextWithSuggestions.simpleTextOf(text);
-    List<TextWithWhitespace> sentence = txt.sentence();
+    List<TextWithMarkup> sentence = txt.sentence();
     if (sentence.size() < 4) {
       logger.info("Text should be longer than 3 characters, was: {}", text);
       return txt;
     }
     var replacement = Replacement.replaceAt(1, "La");
-    var rep = RuleCode.valueOf("Replace '" + sentence.get(replacement.startIdx()).text() + "' with '" + replacement.replacementText().trim() + "'");
+    var rep = "Replace '" + sentence.get(replacement.startIdx()).text() + "' with '" + replacement.replacementText().trim() + "'";
 
     Replacement insert = Replacement.insertAt(1, "bon");
-    var ins = RuleCode.valueOf("Insert '" + insert.replacementText().trim() + "' after first word");
-    var del = RuleCode.valueOf("Delete '" + sentence.get(1).completeText() + sentence.get(2).text() + "'");
+    var ins = "Insert '" + insert.replacementText().trim() + "' after first word";
+    var del = "Delete '" + sentence.get(1).completeText() + sentence.get(2).text() + "'";
     return txt.withSuggestions(
         Suggestion.changeOf(rep, replacement, 0),
         Suggestion.changeOf(ins, insert, 0),

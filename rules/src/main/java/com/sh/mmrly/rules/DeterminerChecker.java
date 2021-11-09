@@ -57,6 +57,10 @@ public class DeterminerChecker implements RuleChecker {
 
   private Suggestion determinerChangeOf(int nounIdx, int detIdx, String replacement) {
     Replacement detChg = Replacement.replaceAt(detIdx, replacement);
-    return Suggestion.changeOf(code(), detChg, detIdx, nounIdx);
+    return Suggestion.changeOf(title(), detChg, detIdx, nounIdx);
+  }
+
+  private String title() {
+    return "Determiner should accord with its noun";
   }
 }

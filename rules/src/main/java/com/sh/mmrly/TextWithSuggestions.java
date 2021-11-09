@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public record TextWithSuggestions(
-    List<TextWithWhitespace> sentence, // sentence tokens
+    List<TextWithMarkup> sentence, // sentence tokens
     List<Suggestion> suggestions // suggestions
 ) {
   public static TextWithSuggestions simpleTextOf(String text) {
@@ -18,7 +18,7 @@ public record TextWithSuggestions(
         parts.subList(0, Math.max(0, len - 1)).stream().map(TWS::textWithSpaceOf),
         parts.subList(Math.max(0, len - 1), len).stream().map(TWS::textOf)
     ).collect(Collectors.toList());
-    return new TextWithSuggestions(sentence, List.of());
+    return new TextWithSuggestions(TextWithMarkup.listOf(sentence), List.of());
   }
 
   public TextWithSuggestions withSuggestions(Suggestion... newSuggestions) {
