@@ -14,11 +14,12 @@
             <h1>Frammarly</h1>
         </header>
         <section class="main">
-            <div @blur="update" class="editor" contenteditable id="editor" v-html="sourceHtml"></div>
+            <div @blur="onEdit" @input="onEdit" class="editor" contenteditable
+                 id="editor" v-html="sourceHtml"></div>
             <div class="todos">
                 <ul class="todo-list">
                     <li :class="{ completed: todo.completed }" :key="todo.id" class="todo"
-                        v-for="todo in filteredTodos">
+                        v-for="todo in suggestions">
                         <div class="view">
                             <input @click="applyTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed"/>
                             <label>{{ todo.title }}</label>
@@ -30,7 +31,7 @@
         </section>
     </section>
     <footer class="info">
-        <h2>Write french text in the area to the left. Grammar improvement suggestions will appear on the right.</h2>
+        <h2>Write french text in the area to the left. AI-powered improvement suggestions will appear on the right.</h2>
         <p>Written by <a href="https://github.com/shaposhnyk">V Sh</a></p>
     </footer>
 </div>
