@@ -9,6 +9,9 @@ const app = Vue.createApp({
       todos: []
     };
   },
+  created: function() {
+    this.fetchSuggestions(this.sourceText);
+  },
   computed: {
     sourceHtml() {
       return this.source
@@ -24,7 +27,7 @@ const app = Vue.createApp({
   },
   methods: {
     onEdit: _.debounce(function (e) {
-      this.fetchSuggestions();
+      this.fetchSuggestions(e.target.innerText);
     }, 1000),
     applyTodo(todo) {
       if (!todo.disabled) {
@@ -39,12 +42,12 @@ const app = Vue.createApp({
     },
     finishUpdatesLater: _.debounce(function (todo) {
       this.todos.splice(this.todos.indexOf(todo), 1);
-      this.fetchSuggestions();
+      this.fetchSuggestions(this.sourceText);
     }, 500),
-    fetchSuggestions() {
+    fetchSuggestions(text) {
       var xhr = new XMLHttpRequest();
       var self = this;
-      xhr.open("GET", apiURL + this.sourceText);
+      xhr.open("GET", apiURL + text);
       xhr.onload = function() {
         var res = JSON.parse(xhr.responseText);
         self.source = res.sentence;
