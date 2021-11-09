@@ -73,6 +73,11 @@ public class SpacyCorrector extends DummyCorrector implements Corrector {
         )
         .collect(Collectors.joining("\t"));
     logger.info("        with morphs: {}", morphs);
+    final var children = sentence.tags().stream()
+        .map(TaggedToken::children)
+        .map(ch -> ch.stream().map(Object::toString).collect(Collectors.joining(",", "", ".")))
+        .collect(Collectors.joining("\t"));
+    logger.info("      with children: {}", children);
   }
 
   private List<Suggestion> computeSuggestions(List<TaggedToken> sentence) {

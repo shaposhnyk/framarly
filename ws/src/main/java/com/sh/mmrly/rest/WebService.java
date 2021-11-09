@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 
 @Path("/")
@@ -27,8 +29,10 @@ public class WebService {
   @Path("/todos")
   @Produces(MediaType.APPLICATION_JSON)
   public TextWithSuggestions suggestChanges(@QueryParam("text") String text) {
-    Log.infov("Suggesting changes for: {0}", text);
-    return corrector.makeSuggestions(text);
+    Instant starts = Instant.now();
+    TextWithSuggestions result = corrector.makeSuggestions(text);
+    Log.infov("Suggested changes for: {0} in {1} ms", text, Duration.between(starts, Instant.now()).multipliedBy(1000).getSeconds());
+    return result;
   }
 
   @POST
