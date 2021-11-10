@@ -2,7 +2,7 @@ package com.sh.mmrly.nlp;
 
 import org.jetbrains.annotations.NotNull;
 
-public record MGender(@NotNull String ref) {
+public record MGender(@NotNull String ref) implements Referencable {
   public static final MGender MASC = new MGender("Masc");
   public static final MGender FEM = new MGender("Fem");
 

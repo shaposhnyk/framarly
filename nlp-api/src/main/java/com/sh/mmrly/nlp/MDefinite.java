@@ -2,7 +2,7 @@ package com.sh.mmrly.nlp;
 
 import org.jetbrains.annotations.NotNull;
 
-public record MDefinite(@NotNull String ref) {
+public record MDefinite(@NotNull String ref) implements Referencable {
   public static final MDefinite DEF = new MDefinite("Def");
   public static final MDefinite IND = new MDefinite("Ind");
 

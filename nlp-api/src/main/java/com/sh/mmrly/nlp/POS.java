@@ -2,7 +2,7 @@ package com.sh.mmrly.nlp;
 
 import org.jetbrains.annotations.NotNull;
 
-public record POS(@NotNull String ref) {
+public record POS(@NotNull String ref) implements Referencable {
   public static final POS UNKNOWN = new POS("UNKNOWN");
   public static final POS DET = new POS("DET");
   public static final POS NOUN = new POS("NOUN");

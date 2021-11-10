@@ -2,7 +2,7 @@ package com.sh.mmrly.nlp;
 
 import org.jetbrains.annotations.NotNull;
 
-public record MNumber(@NotNull String ref) {
+public record MNumber(@NotNull String ref) implements Referencable {
   public static final MNumber SINGULAR = new MNumber("Sing");
   public static final MNumber PLURAL = new MNumber("Plur");
 

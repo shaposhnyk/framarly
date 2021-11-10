@@ -2,7 +2,7 @@ package com.sh.mmrly.nlp;
 
 import org.jetbrains.annotations.NotNull;
 
-public record DEP(@NotNull String ref) {
+public record DEP(@NotNull String ref) implements Referencable {
   public static final DEP ROOT = new DEP("ROOT");
   public static final DEP nsubj = new DEP("nsubj");
   public static final DEP tense = new DEP("aux:tense");
