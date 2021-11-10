@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public record TextWithMarkup(
@@ -21,6 +22,9 @@ public record TextWithMarkup(
   }
 
   public TextWithMarkup withSelectionType(@Nullable SelectionType type) {
+    if (Objects.equals(type, this.type)) {
+      return this;
+    }
     return new TextWithMarkup(text, whitespace, type);
   }
 }

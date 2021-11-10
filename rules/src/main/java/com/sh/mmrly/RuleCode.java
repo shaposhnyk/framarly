@@ -1,6 +1,8 @@
 package com.sh.mmrly;
 
-public record RuleCode(String ref) {
+import com.sh.mmrly.nlp.Referencable;
+
+public record RuleCode(String ref) implements Referencable {
   public static RuleCode valueOf(String value) {
     return value == null ? null : new RuleCode(value);
   }

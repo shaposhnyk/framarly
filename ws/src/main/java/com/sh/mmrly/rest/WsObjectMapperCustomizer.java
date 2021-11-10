@@ -1,13 +1,13 @@
 package com.sh.mmrly.rest;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleDeserializers;
 import com.fasterxml.jackson.databind.module.SimpleSerializers;
-import com.sh.mmrly.RuleCode;
-import com.sh.mmrly.SelectionType;
+import com.sh.mmrly.nlp.Referencable;
 import io.quarkus.jackson.ObjectMapperCustomizer;
 import io.quarkus.logging.Log;
 import io.quarkus.runtime.LaunchMode;
@@ -22,6 +22,7 @@ public class WsObjectMapperCustomizer implements ObjectMapperCustomizer {
     if (ProfileManager.getLaunchMode().equals(LaunchMode.DEVELOPMENT)) {
       Log.info("Activating JSON pretty printing");
       mapper.enable(SerializationFeature.INDENT_OUTPUT);
+      mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
       mapper.registerModule(new CustomModule());
     }
@@ -44,16 +45,10 @@ public class WsObjectMapperCustomizer implements ObjectMapperCustomizer {
       context.addDeserializers(sd);
 
       SimpleSerializers ss = new SimpleSerializers();
-      ss.addSerializer(RuleCode.class, new JsonSerializer<>() {
+      ss.addSerializer(Referencable.class, new JsonSerializer<>() {
         @Override
-        public void serialize(RuleCode value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-          gen.writeString(value == null ? null : value.ref());
-        }
-      });
-      ss.addSerializer(SelectionType.class, new JsonSerializer<>() {
-        @Override
-        public void serialize(SelectionType value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-          gen.writeString(value == null ? null : value.ref());
+        public void serialize(Referencable value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+          gen.writeString(value.ref());
         }
       });
       context.addSerializers(ss);

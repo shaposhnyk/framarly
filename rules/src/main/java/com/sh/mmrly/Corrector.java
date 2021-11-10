@@ -9,5 +9,5 @@ public interface Corrector {
 
   TextWithSuggestions makeSuggestions(List<TextWithWhitespace> sentences);
 
-  TextWithSuggestions applySuggestion(List<TextWithWhitespace> sentence, Suggestion suggestion);
+  TextWithSuggestions applySuggestion(List<? extends TextWithWhitespace> sentence, Suggestion suggestion);
 }

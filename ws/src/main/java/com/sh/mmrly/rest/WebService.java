@@ -2,8 +2,8 @@ package com.sh.mmrly.rest;
 
 import com.sh.mmrly.Corrector;
 import com.sh.mmrly.Suggestion;
+import com.sh.mmrly.TextWithMarkup;
 import com.sh.mmrly.TextWithSuggestions;
-import com.sh.mmrly.nlp.TextWithWhitespace;
 import io.quarkus.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +40,7 @@ public class WebService {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public TextWithSuggestions apply(TextWithSuggestions input) {
-    List<TextWithWhitespace> sentence = input.sentence();
+    List<TextWithMarkup> sentence = input.sentence();
     if (input.suggestions().size() < 1) {
       throw new IllegalArgumentException();
     }

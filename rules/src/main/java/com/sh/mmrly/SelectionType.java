@@ -1,6 +1,8 @@
 package com.sh.mmrly;
 
-public record SelectionType(String ref) {
+import com.sh.mmrly.nlp.Referencable;
+
+public record SelectionType(String ref) implements Referencable {
   public static final SelectionType ERROR = new SelectionType("ERR");
 
   public static SelectionType valueOf(String value) {

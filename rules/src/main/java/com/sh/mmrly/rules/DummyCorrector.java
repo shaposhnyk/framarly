@@ -45,7 +45,7 @@ public class DummyCorrector implements Corrector {
   }
 
   @Override
-  public TextWithSuggestions applySuggestion(List<TextWithWhitespace> sentence, Suggestion suggestion) {
+  public TextWithSuggestions applySuggestion(List<? extends TextWithWhitespace> sentence, Suggestion suggestion) {
     List<TextWithWhitespace> mutableSentence = new ArrayList<>(sentence);
     for (Replacement r : suggestion.replacements()) {
       int idx = r.startIdx();
