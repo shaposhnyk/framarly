@@ -15,7 +15,7 @@
         </header>
         <section class="main">
             <div @blur="onEdit" @input="onEdit" class="editor" contenteditable
-                 id="editor" v-html="sourceHtml"></div>
+                 id="editor" ref="editor" v-html="sourceHtml"></div>
             <div class="todos">
                 <ul class="todo-list">
                     <li :class="{ completed: todo.completed }" :key="todo.id" class="todo"
