@@ -14,7 +14,7 @@
             <h1>Frammarly</h1>
         </header>
         <section class="main">
-            <div @blur="onEdit" @input="onEdit" class="editor" contenteditable
+            <div @blur="onType" @input="onType" class="editor" contenteditable
                  id="editor" ref="editor" v-html="sourceHtml"></div>
             <div class="todos">
                 <ul class="todo-list">
