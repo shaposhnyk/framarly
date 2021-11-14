@@ -31,7 +31,7 @@ public class WebService {
   public TextWithSuggestions suggestChanges(@QueryParam("text") String text) {
     Instant starts = Instant.now();
     TextWithSuggestions result = corrector.makeSuggestions(text);
-    Log.infov("Suggested changes for: {0} in {1} ms", text, Duration.between(starts, Instant.now()).multipliedBy(1000).getSeconds());
+    Log.infov("Suggested {0} changes for: {1} in {2} ms", result.suggestions().size(), text, Duration.between(starts, Instant.now()).multipliedBy(1000).getSeconds());
     return result;
   }
 
